@@ -21,7 +21,14 @@ static int	error(void)
 	return (1);
 }
 
-/* ---------- PARSING ---------- */
+/* lecture et vérification des pièces */
+
+/*
+** une pièce = 4 lignes de 4 caractères + '\n', donc 20 octets.
+** links compte les côtés de blocs qui se touchent : il en faut au moins 3
+** pour que les 4 blocs soient reliés (le carré en a 4).
+** à la fin je recale la pièce en haut à gauche pour pouvoir comparer.
+*/
 
 static int	parse_piece(const char *s, t_piece *p)
 {
@@ -87,6 +94,11 @@ static int	read_file(const char *path, char *buf)
 	return (total);
 }
 
+/*
+** 21 octets par pièce avec la ligne vide, sauf la dernière qui n'en a pas,
+** d'où le total % 21 == 20
+*/
+
 static int	parse_all(const char *path, t_piece *p)
 {
 	char	buf[BUF_SIZE];
@@ -112,7 +124,7 @@ static int	parse_all(const char *path, t_piece *p)
 	return (n);
 }
 
-/* ---------- RESOLUTION (backtracking) ---------- */
+/* la recherche, par backtracking */
 
 static int	can_place(t_piece *p, int x, int y, int size)
 {
@@ -151,6 +163,11 @@ static int	same(t_piece *a, t_piece *b)
 	return (1);
 }
 
+/*
+** si la pièce a la même forme que la précédente, je reprends juste après la
+** position de celle-ci : sinon on reteste les mêmes combinaisons en boucle
+*/
+
 static int	solve(t_piece *p, int n, int i, int size)
 {
 	int	pos;
@@ -175,7 +192,10 @@ static int	solve(t_piece *p, int n, int i, int size)
 	return (0);
 }
 
-/* ---------- MAIN ---------- */
+/*
+** on part du plus petit carré qui peut contenir 4 * n blocs,
+** et on l'agrandit tant que les pièces ne rentrent pas
+*/
 
 int			main(int argc, char **argv)
 {
