@@ -1,6 +1,16 @@
-# Fillit : guide de résolution détaillé
+# Projets en C
 
-Ce guide explique, étape par étape, comment fonctionne la solution fournie dans `fillit.c`. Il couvre le raisonnement, les structures de données, chaque fonction, et des exemples concrets.
+Mes projets en C. Pour l'instant il y a Fillit, dans `Fillit/` (`fillit.c`, `Makefile` et un fichier d'exemple `sample.fillit`).
+
+```bash
+cd Fillit
+make
+./fillit sample.fillit
+```
+
+# Fillit : comment ça marche
+
+J'ai écrit ce guide pour expliquer ma solution étape par étape : le raisonnement, les structures de données, chaque fonction, avec des exemples.
 
 ## Sommaire
 
@@ -660,7 +670,7 @@ Aucune de ces optimisations ne change le résultat : elles ne font qu'éviter de
 
 ### Pour respecter la Norme 42
 
-Le code fourni est dans un seul fichier pour la lisibilité. La Norme impose notamment : 25 lignes maximum par fonction, 5 fonctions maximum par fichier, pas de `for`, déclarations en début de fonction, 80 colonnes maximum. Il faudra donc découper le code, par exemple :
+Mon code est dans un seul fichier pour qu'il reste facile à lire. La Norme impose notamment : 25 lignes maximum par fonction, 5 fonctions maximum par fichier, pas de `for`, déclarations en début de fonction, 80 colonnes maximum. Il faudra donc découper le code, par exemple :
 
 ```
 fillit.h      → structure t_piece, prototypes, constantes
